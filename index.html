@@ -352,7 +352,7 @@ function purchaseAppraisal(v){purchaseOOR.classList.toggle("hidden",v!=="Yes");}
 document.getElementById("icrForm").addEventListener("submit", function(e){
   e.preventDefault();
 
-  fetch("PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE", {
+  fetch("https://script.google.com/macros/s/AKfycbxWycwuz8Diry8vhB7P0MCbtOpILKASqfEtCjNlWi8QryLdo8YJDIHB28hQ2saRarT6qQ/exec", {
     method: "POST",
     body: new FormData(this)
   })
@@ -372,3 +372,4 @@ document.getElementById("icrForm").addEventListener("submit", function(e){
 
 </body>
 </html>
+
