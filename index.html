@@ -257,6 +257,7 @@ function entityDocs(el,type){
   const sec=document.getElementById(type+"EntityCorrect");
   sec.classList.toggle("hidden",el.value!=="Yes");
   setRequired(sec,el.value==="Yes");
+
   const det=document.getElementById(type+"EntityDetails");
   det.classList.add("hidden");
   setRequired(det,false);
@@ -268,17 +269,32 @@ function entityCorrect(el,type){
   setRequired(det,el.value==="No");
 }
 
-/* GOOGLE SHEETS SUBMIT */
-document.getElementById("icrForm").addEventListener("submit",e=>{
+/* GOOGLE SHEETS SUBMIT — FIXED */
+document.getElementById("icrForm").addEventListener("submit", function(e){
   e.preventDefault();
-  fetch("https://script.google.com/macros/s/AKfycbytJSNw7XMe1JlEFHUFxGDjP9ckRRdIudCw6VM5n9WVPUWEiKQpMxoAaUm5PXTJwjn-6g/exec",{method:"POST",body:new FormData(e.target)})
-  .then(()=>{alert("Form submitted successfully");e.target.reset();});
+
+  fetch(
+    "https://script.google.com/macros/s/AKfycbytJSNw7XMe1JlEFHUFxGDjP9ckRRdIudCw6VM5n9WVPUWEiKQpMxoAaUm5PXTJwjn-6g/exec",
+    {
+      method: "POST",
+      mode: "no-cors",
+      body: new FormData(e.target)
+    }
+  )
+  .then(() => {
+    alert("Form submitted successfully");
+    e.target.reset();
+  })
+  .catch(err => {
+    alert("Submission failed");
+    console.error(err);
+  });
 });
 </script>
 
+
 </body>
 </html>
-
 
 
 
