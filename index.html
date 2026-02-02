@@ -271,13 +271,14 @@ function entityCorrect(el,type){
 /* GOOGLE SHEETS SUBMIT */
 document.getElementById("icrForm").addEventListener("submit",e=>{
   e.preventDefault();
-  fetch("https://script.google.com/macros/s/AKfycbwUsLSgbs4Z85sJsc5c6RsJwWLvGt9iduotDRnm89yiJLunoVzReuFyn-AoKQ2_XRT8Jg/exec",{method:"POST",body:new FormData(e.target)})
+  fetch("https://script.google.com/macros/s/AKfycbytJSNw7XMe1JlEFHUFxGDjP9ckRRdIudCw6VM5n9WVPUWEiKQpMxoAaUm5PXTJwjn-6g/exec",{method:"POST",body:new FormData(e.target)})
   .then(()=>{alert("Form submitted successfully");e.target.reset();});
 });
 </script>
 
 </body>
 </html>
+
 
 
 
