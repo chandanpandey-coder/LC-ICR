@@ -29,7 +29,7 @@ button{
 <div class="container">
 <h1>ICR – Feedback Form</h1>
 
-<form id="icrForm">
+<form id="icrForm" novalidate>
 
 <!-- BASIC -->
 <div class="section">
@@ -56,28 +56,41 @@ button{
 <div class="section">
 <label>Are Entity documents received (except OA/Bylaws)? *</label>
 <select name="Refi_EntityDocs" onchange="entityDocs(this,'refi')" required>
-<option value="">- Select -</option><option>Yes</option><option>No</option>
+<option value="">- Select -</option>
+<option>Yes</option>
+<option>No</option>
 </select>
 </div>
 
 <div id="refiEntityCorrect" class="section hidden">
 <label>Is Entity Data entered correctly? *</label>
 <select name="Refi_EntityCorrect" onchange="entityCorrect(this,'refi')">
-<option value="">- Select -</option><option>Yes</option><option>No</option>
+<option value="">- Select -</option>
+<option>Yes</option>
+<option>No</option>
 </select>
 </div>
 
 <div id="refiEntityDetails" class="section hidden">
-<label>EIN updated? *</label><select name="Refi_EIN"><option value="">- Select -</option><option>Yes</option><option>No</option></select>
-<label>Formation updated? *</label><select name="Refi_Formation"><option value="">- Select -</option><option>Yes</option><option>No</option></select>
-<label>COGS updated? *</label><select name="Refi_COGS"><option value="">- Select -</option><option>Yes</option><option>No</option><option>N/A</option></select>
-<label>Foreign Registration updated? *</label><select name="Refi_Foreign"><option value="">- Select -</option><option>Yes</option><option>No</option><option>N/A</option></select>
+<label>EIN updated? *</label>
+<select name="Refi_EIN"><option value="">- Select -</option><option>Yes</option><option>No</option></select>
+
+<label>Formation updated? *</label>
+<select name="Refi_Formation"><option value="">- Select -</option><option>Yes</option><option>No</option></select>
+
+<label>COGS updated? *</label>
+<select name="Refi_COGS"><option value="">- Select -</option><option>Yes</option><option>No</option><option>N/A</option></select>
+
+<label>Foreign Registration updated? *</label>
+<select name="Refi_Foreign"><option value="">- Select -</option><option>Yes</option><option>No</option><option>N/A</option></select>
 </div>
 
 <div class="section">
 <label>Are OA / Bylaws received? *</label>
 <select name="Refi_OA" onchange="toggleOA(this,'refi')" required>
-<option value="">- Select -</option><option>Yes</option><option>No</option>
+<option value="">- Select -</option>
+<option>Yes</option>
+<option>No</option>
 </select>
 
 <div id="refiOA" class="hidden">
@@ -106,7 +119,10 @@ button{
 <div class="section">
 <label>Is Payoff received? *</label>
 <select name="Refi_Payoff" onchange="toggleSection(this,'refiPayoff','Yes')" required>
-<option value="">- Select -</option><option>Yes</option><option>No</option><option>N/A</option>
+<option value="">- Select -</option>
+<option>Yes</option>
+<option>No</option>
+<option>N/A</option>
 </select>
 
 <div id="refiPayoff" class="hidden">
@@ -118,7 +134,9 @@ button{
 <div class="section">
 <label>Is Appraisal received? *</label>
 <select name="Refi_Appraisal" onchange="toggleSection(this,'refiOOR','Yes')" required>
-<option value="">- Select -</option><option>Yes</option><option>No</option>
+<option value="">- Select -</option>
+<option>Yes</option>
+<option>No</option>
 </select>
 
 <div id="refiOOR" class="hidden">
@@ -135,28 +153,41 @@ button{
 <div class="section">
 <label>Are Entity documents received (except OA/Bylaws)? *</label>
 <select name="Pur_EntityDocs" onchange="entityDocs(this,'purchase')" required>
-<option value="">- Select -</option><option>Yes</option><option>No</option>
+<option value="">- Select -</option>
+<option>Yes</option>
+<option>No</option>
 </select>
 </div>
 
 <div id="purchaseEntityCorrect" class="section hidden">
 <label>Is Entity Data entered correctly? *</label>
 <select name="Pur_EntityCorrect" onchange="entityCorrect(this,'purchase')">
-<option value="">- Select -</option><option>Yes</option><option>No</option>
+<option value="">- Select -</option>
+<option>Yes</option>
+<option>No</option>
 </select>
 </div>
 
 <div id="purchaseEntityDetails" class="section hidden">
-<label>EIN updated? *</label><select name="Pur_EIN"><option value="">- Select -</option><option>Yes</option><option>No</option></select>
-<label>Formation updated? *</label><select name="Pur_Formation"><option value="">- Select -</option><option>Yes</option><option>No</option></select>
-<label>COGS updated? *</label><select name="Pur_COGS"><option value="">- Select -</option><option>Yes</option><option>No</option><option>N/A</option></select>
-<label>Foreign Registration updated? *</label><select name="Pur_Foreign"><option value="">- Select -</option><option>Yes</option><option>No</option><option>N/A</option></select>
+<label>EIN updated? *</label>
+<select name="Pur_EIN"><option value="">- Select -</option><option>Yes</option><option>No</option></select>
+
+<label>Formation updated? *</label>
+<select name="Pur_Formation"><option value="">- Select -</option><option>Yes</option><option>No</option></select>
+
+<label>COGS updated? *</label>
+<select name="Pur_COGS"><option value="">- Select -</option><option>Yes</option><option>No</option><option>N/A</option></select>
+
+<label>Foreign Registration updated? *</label>
+<select name="Pur_Foreign"><option value="">- Select -</option><option>Yes</option><option>No</option><option>N/A</option></select>
 </div>
 
 <div class="section">
 <label>Are OA / Bylaws received? *</label>
 <select name="Pur_OA" onchange="toggleOA(this,'purchase')" required>
-<option value="">- Select -</option><option>Yes</option><option>No</option>
+<option value="">- Select -</option>
+<option>Yes</option>
+<option>No</option>
 </select>
 
 <div id="purchaseOA" class="hidden">
@@ -182,7 +213,9 @@ button{
 <div class="section">
 <label>Is Purchase Contract received? *</label>
 <select name="Pur_Contract" onchange="toggleSection(this,'purchaseACD','Yes')" required>
-<option value="">- Select -</option><option>Yes</option><option>No</option>
+<option value="">- Select -</option>
+<option>Yes</option>
+<option>No</option>
 </select>
 
 <div id="purchaseACD" class="hidden">
@@ -194,7 +227,10 @@ button{
 <div class="section">
 <label>Is Appraisal received? *</label>
 <select name="Pur_Appraisal" onchange="toggleSection(this,'purchaseOOR','Yes')" required>
-<option value="">- Select -</option><option>Yes</option><option>No</option><option>N/A</option>
+<option value="">- Select -</option>
+<option>Yes</option>
+<option>No</option>
+<option>N/A</option>
 </select>
 
 <div id="purchaseOOR" class="hidden">
@@ -217,7 +253,6 @@ button{
 <select name="Deal_Name_Updated" required><option value="">- Select -</option><option>Yes</option><option>No</option></select>
 </div>
 
-<!-- COMMENTS -->
 <div class="section">
 <label>Comments *</label>
 <textarea name="Final_Comments" required></textarea>
@@ -269,33 +304,25 @@ function entityCorrect(el,type){
   setRequired(det,el.value==="No");
 }
 
-/* GOOGLE SHEETS SUBMIT — FIXED */
+/* GOOGLE SHEETS SUBMIT — FINAL FIX */
 document.getElementById("icrForm").addEventListener("submit", function(e){
   e.preventDefault();
+
+  console.log("Submit triggered");
 
   fetch(
     "https://script.google.com/macros/s/AKfycbytJSNw7XMe1JlEFHUFxGDjP9ckRRdIudCw6VM5n9WVPUWEiKQpMxoAaUm5PXTJwjn-6g/exec",
     {
       method: "POST",
       mode: "no-cors",
-      body: new FormData(e.target)
+      body: new FormData(this)
     }
-  )
-  .then(() => {
-    alert("Form submitted successfully");
-    e.target.reset();
-  })
-  .catch(err => {
-    alert("Submission failed");
-    console.error(err);
-  });
+  );
+
+  alert("Form submitted successfully");
+  this.reset();
 });
 </script>
 
-
 </body>
 </html>
-
-
-
-
