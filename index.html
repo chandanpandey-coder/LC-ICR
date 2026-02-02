@@ -271,10 +271,11 @@ function entityCorrect(el,type){
 /* GOOGLE SHEETS SUBMIT */
 document.getElementById("icrForm").addEventListener("submit",e=>{
   e.preventDefault();
-  fetch("PASTE_YOUR_WEB_APP_URL_HERE",{method:"POST",body:new FormData(e.target)})
+  fetch("https://script.google.com/macros/s/AKfycbxWycwuz8Diry8vhB7P0MCbtOpILKASqfEtCjNlWi8QryLdo8YJDIHB28hQ2saRarT6qQ/exec",{method:"POST",body:new FormData(e.target)})
   .then(()=>{alert("Form submitted successfully");e.target.reset();});
 });
 </script>
 
 </body>
 </html>
+
