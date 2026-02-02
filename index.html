@@ -20,9 +20,8 @@ button{
   margin-top:60px;padding:10px 26px;
   border:none;border-radius:10px;
   background:#3b82f6;color:#fff;
-  opacity:.6;cursor:not-allowed
+  cursor:pointer
 }
-button.enabled{opacity:1;cursor:pointer}
 </style>
 </head>
 
@@ -84,6 +83,7 @@ button.enabled{opacity:1;cursor:pointer}
 <div id="refiOA" class="hidden">
 <label>OA highlighted correctly? *</label>
 <select name="Refi_OA_Highlighted"><option value="">- Select -</option><option>Yes</option><option>No</option></select>
+
 <label>Signature updated correctly? *</label>
 <select name="Refi_Signature"><option value="">- Select -</option><option>Yes</option><option>No</option></select>
 </div>
@@ -223,31 +223,18 @@ button.enabled{opacity:1;cursor:pointer}
 <textarea name="Final_Comments" required></textarea>
 </div>
 
-<button id="submitBtn" type="submit" disabled>Submit</button>
+<button type="submit">Submit</button>
 </form>
 </div>
 
 <script>
-const form=document.getElementById("icrForm");
-const submitBtn=document.getElementById("submitBtn");
-
 function setRequired(section,state){
   section.querySelectorAll("select,input,textarea").forEach(el=>el.required=state);
-  validateForm();
 }
-
-function validateForm(){
-  submitBtn.disabled=!form.checkValidity();
-  submitBtn.classList.toggle("enabled",form.checkValidity());
-}
-
-form.addEventListener("input",validateForm);
-form.addEventListener("change",validateForm);
 
 function toggleLoan(v){
   refiSection.classList.toggle("hidden",v!=="Refi");
   purchaseSection.classList.toggle("hidden",v!=="Purchase");
-  validateForm();
 }
 
 function toggleSection(el,id,val){
@@ -282,10 +269,10 @@ function entityCorrect(el,type){
 }
 
 /* GOOGLE SHEETS SUBMIT */
-form.addEventListener("submit",e=>{
+document.getElementById("icrForm").addEventListener("submit",e=>{
   e.preventDefault();
-  fetch("https://script.google.com/macros/s/AKfycbxWycwuz8Diry8vhB7P0MCbtOpILKASqfEtCjNlWi8QryLdo8YJDIHB28hQ2saRarT6qQ/exec",{method:"POST",body:new FormData(form)})
-  .then(()=>{alert("Form submitted successfully");form.reset();validateForm();});
+  fetch("PASTE_YOUR_WEB_APP_URL_HERE",{method:"POST",body:new FormData(e.target)})
+  .then(()=>{alert("Form submitted successfully");e.target.reset();});
 });
 </script>
 
