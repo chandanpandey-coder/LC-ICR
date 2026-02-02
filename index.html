@@ -3,53 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <title>ICR Feedback Form</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
-body {
-  font-family: 'Inter', sans-serif;
-  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-  padding: 40px;
-  color: #fff;
+body{font-family:Inter,sans-serif;background:#eef4fa;padding:40px}
+.container{max-width:1200px;margin:auto;background:#fff;border-radius:18px;padding:56px}
+.section{margin-top:56px}
+label{display:block;margin-top:28px;font-weight:600}
+select,input,textarea{
+  width:100%;margin-top:10px;padding:14px;
+  border-radius:10px;border:1px solid #cbd5e1
 }
-.container {
-  max-width: 1200px;
-  margin: auto;
-  background: rgba(255,255,255,0.08);
-  backdrop-filter: blur(14px);
-  border-radius: 20px;
-  padding: 40px;
+textarea{min-height:120px;resize:vertical}
+.hidden{display:none}
+button{
+  margin-top:60px;padding:10px 26px;
+  border:none;border-radius:10px;
+  background:#3b82f6;color:#fff;
+  opacity:.6;cursor:not-allowed
 }
-h1, h2 {
-  border-bottom: 1px solid rgba(255,255,255,0.25);
-  padding-bottom: 10px;
-}
-.section { margin-top: 40px; }
-label {
-  display: block;
-  margin-top: 16px;
-  font-weight: 600;
-}
-select, input {
-  width: 100%;
-  margin-top: 6px;
-  padding: 10px;
-  border-radius: 8px;
-  border: none;
-}
-.hidden { display: none; }
-button {
-  margin-top: 40px;
-  padding: 16px;
-  width: 100%;
-  border-radius: 12px;
-  border: none;
-  background: #00c6ff;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-}
+button.enabled{opacity:1;cursor:pointer}
 </style>
 </head>
 
@@ -59,317 +32,262 @@ button {
 
 <form id="icrForm">
 
-<!-- BASIC INFORMATION -->
+<!-- BASIC -->
 <div class="section">
-<h2>Basic Information</h2>
-
 <label>Loan Number *</label>
 <input name="LoanNumber" required>
 
 <label>Reviewer Name *</label>
 <input name="ReviewerName" required>
-
-<label>Was folder created on the day the loan was assigned? *</label>
-<select name="FolderCreated" required>
-  <option value="">Select</option>
-  <option>Yes</option>
-  <option>No</option>
-</select>
-
-<label>Was the Review Sheet created on the day the loan was assigned? *</label>
-<select name="ReviewSheetCreated" required>
-  <option value="">Select</option>
-  <option>Yes</option>
-  <option>No</option>
-</select>
 </div>
 
 <!-- LOAN TYPE -->
 <div class="section">
-<h2>Loan Type</h2>
-<label>Purchase or Refi? *</label>
+<label>Loan Type *</label>
 <select name="LoanType" onchange="toggleLoan(this.value)" required>
-  <option value="">Select</option>
-  <option value="Refi">Refi</option>
-  <option value="Purchase">Purchase</option>
+<option value="">- Select -</option>
+<option value="Refi">Refi</option>
+<option value="Purchase">Purchase</option>
 </select>
 </div>
 
-<!-- ================= REFI ================= -->
+<!-- ========================== REFI ========================== -->
 <div id="refiSection" class="hidden">
 
 <div class="section">
-<h2>Refi – Data Entry</h2>
+<label>Are Entity documents received (except OA/Bylaws)? *</label>
+<select name="Refi_EntityDocs" onchange="entityDocs(this,'refi')" required>
+<option value="">- Select -</option><option>Yes</option><option>No</option>
+</select>
+</div>
 
-<label>Is Data Entry done correctly?</label>
-<select name="Refi_DataEntry" onchange="refiDataEntry(this.value)">
-  <option>Yes</option>
-  <option>No</option>
+<div id="refiEntityCorrect" class="section hidden">
+<label>Is Entity Data entered correctly? *</label>
+<select name="Refi_EntityCorrect" onchange="entityCorrect(this,'refi')">
+<option value="">- Select -</option><option>Yes</option><option>No</option>
+</select>
+</div>
+
+<div id="refiEntityDetails" class="section hidden">
+<label>EIN updated? *</label><select name="Refi_EIN"><option value="">- Select -</option><option>Yes</option><option>No</option></select>
+<label>Formation updated? *</label><select name="Refi_Formation"><option value="">- Select -</option><option>Yes</option><option>No</option></select>
+<label>COGS updated? *</label><select name="Refi_COGS"><option value="">- Select -</option><option>Yes</option><option>No</option><option>N/A</option></select>
+<label>Foreign Registration updated? *</label><select name="Refi_Foreign"><option value="">- Select -</option><option>Yes</option><option>No</option><option>N/A</option></select>
+</div>
+
+<div class="section">
+<label>Are OA / Bylaws received? *</label>
+<select name="Refi_OA" onchange="toggleOA(this,'refi')" required>
+<option value="">- Select -</option><option>Yes</option><option>No</option>
 </select>
 
-<div id="refiDataChecks" class="hidden">
-<label>Loan Number updated?</label>
-<select name="Refi_LoanNumber"><option>Yes</option><option>No</option></select>
+<div id="refiOA" class="hidden">
+<label>OA highlighted correctly? *</label>
+<select name="Refi_OA_Highlighted"><option value="">- Select -</option><option>Yes</option><option>No</option></select>
+<label>Signature updated correctly? *</label>
+<select name="Refi_Signature"><option value="">- Select -</option><option>Yes</option><option>No</option></select>
+</div>
+</div>
 
-<label>Borrower Name updated correctly?</label>
-<select name="Refi_Borrower"><option>Yes</option><option>No</option></select>
+<div id="refiChildGate" class="section hidden">
+<label>Closing Entity Type *</label>
+<select name="Refi_Child_Type" onchange="toggleSection(this,'refiChild','Child Entity')">
+<option value="">- Select -</option>
+<option>No Child Entity</option>
+<option>Child Entity</option>
+</select>
 
-<label>Loan Type & Purpose updated correctly?</label>
-<select name="Refi_Purpose"><option>Yes</option><option>No</option></select>
-
-<label>Property Address updated correctly?</label>
-<select name="Refi_Address"><option>Yes</option><option>No</option></select>
-
-<label>Loan Values updated correctly?</label>
-<select name="Refi_Values"><option>Yes</option><option>No</option></select>
+<div id="refiChild" class="hidden">
+<label>Child Entity info updated? *</label>
+<select name="Refi_Child_Info"><option value="">- Select -</option><option>Yes</option><option>No</option></select>
 </div>
 </div>
 
 <div class="section">
-<h2>Refi – Entity Documents</h2>
-
-<label>Are Entity documents received (except OA/Bylaws)?</label>
-<select name="Refi_EntityDocs" onchange="refiEntityDocs(this.value)">
-  <option>Yes</option>
-  <option>No</option>
+<label>Is Payoff received? *</label>
+<select name="Refi_Payoff" onchange="toggleSection(this,'refiPayoff','Yes')" required>
+<option value="">- Select -</option><option>Yes</option><option>No</option><option>N/A</option>
 </select>
 
-<div id="refiEntityData" class="hidden">
-<label>Is Entity Data entered correctly?</label>
-<select name="Refi_EntityData"><option>Yes</option><option>No</option></select>
-
-<label>Is EIN updated?</label>
-<select name="Refi_EIN"><option>Yes</option><option>No</option></select>
-
-<label>Is Formation State & Date updated?</label>
-<select name="Refi_Formation"><option>Yes</option><option>No</option></select>
-
-<label>Is COGS Date updated?</label>
-<select name="Refi_COGS"><option>Yes</option><option>No</option><option>N/A</option></select>
-
-<label>Is Foreign Entity Registration updated?</label>
-<select name="Refi_Foreign"><option>Yes</option><option>No</option><option>N/A</option></select>
+<div id="refiPayoff" class="hidden">
+<label>Payoff Good Through updated? *</label>
+<select name="Refi_Payoff_GT"><option value="">- Select -</option><option>Yes</option><option>No</option></select>
 </div>
 </div>
 
 <div class="section">
-<h2>Refi – OA / Signature</h2>
-
-<label>Are OA / Bylaws received?</label>
-<select name="Refi_OAReceived" onchange="refiOA(this.value)">
-  <option>Yes</option>
-  <option>No</option>
-</select>
-
-<div id="refiOASection" class="hidden">
-<label>Are OA / Bylaws highlighted correctly?</label>
-<select name="Refi_OAHighlighted"><option>Yes</option><option>No</option></select>
-
-<label>Is Signature updated correctly?</label>
-<select name="Refi_Signature"><option>Yes</option><option>No</option></select>
-</div>
-</div>
-
-<div class="section">
-<h2>Refi – Child Entity</h2>
-
-<label>Closing Entity Type</label>
-<select name="Refi_Child" onchange="refiChild(this.value)">
-  <option>No Child Entity</option>
-  <option>Child Entity</option>
-</select>
-
-<div id="refiChildInfo" class="hidden">
-<label>Is Child Entity Information updated correctly?</label>
-<select name="Refi_ChildInfo"><option>Yes</option><option>No</option></select>
-</div>
-</div>
-
-<div class="section">
-<h2>Refi – Payoff</h2>
-
-<label>Is Payoff Received?</label>
-<select name="Refi_Payoff" onchange="refiPayoff(this.value)">
-  <option>Yes</option>
-  <option>No</option>
-  <option>N/A</option>
-</select>
-
-<div id="refiPayoffGood" class="hidden">
-<label>Is Payoff – Good Through updated?</label>
-<select name="Refi_PayoffGood"><option>Yes</option><option>No</option></select>
-</div>
-</div>
-
-<div class="section">
-<h2>Refi – Appraisal</h2>
-
-<label>Is Appraisal Received?</label>
-<select name="Refi_Appraisal" onchange="refiAppraisal(this.value)">
-  <option>Yes</option>
-  <option>No</option>
+<label>Is Appraisal received? *</label>
+<select name="Refi_Appraisal" onchange="toggleSection(this,'refiOOR','Yes')" required>
+<option value="">- Select -</option><option>Yes</option><option>No</option>
 </select>
 
 <div id="refiOOR" class="hidden">
-<label>Is OOR updated correctly?</label>
-<select name="Refi_OOR"><option>Yes</option><option>No</option></select>
+<label>OOR updated correctly? *</label>
+<select name="Refi_OOR"><option value="">- Select -</option><option>Yes</option><option>No</option></select>
 </div>
 </div>
 
 </div>
 
-<!-- ================= PURCHASE ================= -->
+<!-- ========================== PURCHASE ========================== -->
 <div id="purchaseSection" class="hidden">
 
 <div class="section">
-<h2>Purchase – Data Entry</h2>
+<label>Are Entity documents received (except OA/Bylaws)? *</label>
+<select name="Pur_EntityDocs" onchange="entityDocs(this,'purchase')" required>
+<option value="">- Select -</option><option>Yes</option><option>No</option>
+</select>
+</div>
 
-<label>Is Data Entry done correctly?</label>
-<select name="Purchase_DataEntry" onchange="purchaseData(this.value)">
-  <option>Yes</option>
-  <option>No</option>
+<div id="purchaseEntityCorrect" class="section hidden">
+<label>Is Entity Data entered correctly? *</label>
+<select name="Pur_EntityCorrect" onchange="entityCorrect(this,'purchase')">
+<option value="">- Select -</option><option>Yes</option><option>No</option>
+</select>
+</div>
+
+<div id="purchaseEntityDetails" class="section hidden">
+<label>EIN updated? *</label><select name="Pur_EIN"><option value="">- Select -</option><option>Yes</option><option>No</option></select>
+<label>Formation updated? *</label><select name="Pur_Formation"><option value="">- Select -</option><option>Yes</option><option>No</option></select>
+<label>COGS updated? *</label><select name="Pur_COGS"><option value="">- Select -</option><option>Yes</option><option>No</option><option>N/A</option></select>
+<label>Foreign Registration updated? *</label><select name="Pur_Foreign"><option value="">- Select -</option><option>Yes</option><option>No</option><option>N/A</option></select>
+</div>
+
+<div class="section">
+<label>Are OA / Bylaws received? *</label>
+<select name="Pur_OA" onchange="toggleOA(this,'purchase')" required>
+<option value="">- Select -</option><option>Yes</option><option>No</option>
 </select>
 
-<div id="purchaseDataChecks" class="hidden">
-<label>Loan Number updated?</label>
-<select name="Purchase_Loan"><option>Yes</option><option>No</option></select>
+<div id="purchaseOA" class="hidden">
+<label>OA highlighted correctly? *</label>
+<select name="Pur_OA_Highlighted"><option value="">- Select -</option><option>Yes</option><option>No</option></select>
+</div>
+</div>
 
-<label>Borrower Name updated correctly?</label>
-<select name="Purchase_Borrower"><option>Yes</option><option>No</option></select>
+<div id="purchaseChildGate" class="section hidden">
+<label>Closing Entity Type *</label>
+<select name="Pur_Child_Type" onchange="toggleSection(this,'purchaseChild','Child Entity')">
+<option value="">- Select -</option>
+<option>No Child Entity</option>
+<option>Child Entity</option>
+</select>
 
-<label>Loan Type & Purpose updated correctly?</label>
-<select name="Purchase_Purpose"><option>Yes</option><option>No</option></select>
-
-<label>Property Address updated correctly?</label>
-<select name="Purchase_Address"><option>Yes</option><option>No</option></select>
-
-<label>Loan Values updated correctly?</label>
-<select name="Purchase_Values"><option>Yes</option><option>No</option></select>
+<div id="purchaseChild" class="hidden">
+<label>Child Entity info updated? *</label>
+<select name="Pur_Child_Info"><option value="">- Select -</option><option>Yes</option><option>No</option></select>
 </div>
 </div>
 
 <div class="section">
-<h2>Purchase – Entity</h2>
-
-<label>Are Entity documents received (except OA/Bylaws)?</label>
-<select name="Purchase_EntityDocs" onchange="purchaseEntity(this.value)">
-  <option>Yes</option>
-  <option>No</option>
-</select>
-
-<div id="purchaseEntityData" class="hidden">
-<label>Is EIN updated?</label>
-<select name="Purchase_EIN"><option>Yes</option><option>No</option></select>
-
-<label>Is Formation State & Date updated?</label>
-<select name="Purchase_Formation"><option>Yes</option><option>No</option></select>
-
-<label>Is COGS Date updated?</label>
-<select name="Purchase_COGS"><option>Yes</option><option>No</option><option>N/A</option></select>
-</div>
-</div>
-
-<div class="section">
-<h2>Purchase – OA / Contract</h2>
-
-<label>Are OA / Bylaws received?</label>
-<select name="Purchase_OA" onchange="purchaseOA(this.value)">
-  <option>Yes</option>
-  <option>No</option>
-</select>
-
-<div id="purchaseOAHighlight" class="hidden">
-<label>Are OA / Bylaws highlighted correctly?</label>
-<select name="Purchase_OAHighlighted"><option>Yes</option><option>No</option></select>
-</div>
-
-<label>Is Purchase Contract received?</label>
-<select name="Purchase_Contract" onchange="purchaseContract(this.value)">
-  <option>Yes</option>
-  <option>No</option>
+<label>Is Purchase Contract received? *</label>
+<select name="Pur_Contract" onchange="toggleSection(this,'purchaseACD','Yes')" required>
+<option value="">- Select -</option><option>Yes</option><option>No</option>
 </select>
 
 <div id="purchaseACD" class="hidden">
-<label>Is ACD updated?</label>
-<select name="Purchase_ACD"><option>Yes</option><option>No</option></select>
+<label>Is ACD updated correctly? *</label>
+<select name="Pur_ACD"><option value="">- Select -</option><option>Yes</option><option>No</option></select>
 </div>
 </div>
 
 <div class="section">
-<h2>Purchase – Appraisal</h2>
-
-<label>Is Appraisal Received?</label>
-<select name="Purchase_Appraisal" onchange="purchaseAppraisal(this.value)">
-  <option>Yes</option>
-  <option>No</option>
+<label>Is Appraisal received? *</label>
+<select name="Pur_Appraisal" onchange="toggleSection(this,'purchaseOOR','Yes')" required>
+<option value="">- Select -</option><option>Yes</option><option>No</option><option>N/A</option>
 </select>
 
 <div id="purchaseOOR" class="hidden">
-<label>Is OOR updated correctly?</label>
-<select name="Purchase_OOR"><option>Yes</option><option>No</option></select>
+<label>OOR updated correctly? *</label>
+<select name="Pur_OOR"><option value="">- Select -</option><option>Yes</option><option>No</option></select>
 </div>
 </div>
 
 </div>
 
-<!-- FINAL -->
+<!-- FINAL QUESTIONS -->
 <div class="section">
-<h2>Master Tracker / LC Updates</h2>
+<label>Is the Follow up Done? *</label>
+<select name="Follow_Up_Done" required><option value="">- Select -</option><option>Yes</option><option>No</option></select>
 
-<label>Is Follow-up Done?</label>
-<select name="FollowUp"><option>Yes</option><option>No</option></select>
+<label>Are the Comments Updated? *</label>
+<select name="Comments_Updated" required><option value="">- Select -</option><option>Yes</option><option>No</option></select>
 
-<label>Are Comments Updated?</label>
-<select name="Comments"><option>Yes</option><option>No</option></select>
-
-<label>Is Deal Name updated?</label>
-<select name="DealName"><option>Yes</option><option>No</option></select>
+<label>Is the Deal Name updated? *</label>
+<select name="Deal_Name_Updated" required><option value="">- Select -</option><option>Yes</option><option>No</option></select>
 </div>
 
-<button type="submit">Submit ICR Feedback</button>
+<!-- COMMENTS -->
+<div class="section">
+<label>Comments *</label>
+<textarea name="Final_Comments" required></textarea>
+</div>
 
+<button id="submitBtn" type="submit" disabled>Submit</button>
 </form>
 </div>
 
 <script>
-const refiSection = document.getElementById("refiSection");
-const purchaseSection = document.getElementById("purchaseSection");
+const form=document.getElementById("icrForm");
+const submitBtn=document.getElementById("submitBtn");
 
-function toggleLoan(v){refiSection.classList.toggle("hidden",v!=="Refi");purchaseSection.classList.toggle("hidden",v!=="Purchase");}
-function refiDataEntry(v){refiDataChecks.classList.toggle("hidden",v==="Yes");}
-function refiEntityDocs(v){refiEntityData.classList.toggle("hidden",v==="Yes");}
-function refiOA(v){refiOASection.classList.toggle("hidden",v==="No");}
-function refiChild(v){refiChildInfo.classList.toggle("hidden",v!=="Child Entity");}
-function refiPayoff(v){refiPayoffGood.classList.toggle("hidden",v!=="Yes");}
-function refiAppraisal(v){refiOOR.classList.toggle("hidden",v!=="Yes");}
-function purchaseData(v){purchaseDataChecks.classList.toggle("hidden",v==="Yes");}
-function purchaseEntity(v){purchaseEntityData.classList.toggle("hidden",v==="Yes");}
-function purchaseOA(v){purchaseOAHighlight.classList.toggle("hidden",v==="No");}
-function purchaseContract(v){purchaseACD.classList.toggle("hidden",v!=="Yes");}
-function purchaseAppraisal(v){purchaseOOR.classList.toggle("hidden",v!=="Yes");}
+function setRequired(section,state){
+  section.querySelectorAll("select,input,textarea").forEach(el=>el.required=state);
+  validateForm();
+}
 
-/* ===== FORM SUBMISSION ===== */
-document.getElementById("icrForm").addEventListener("submit", function(e){
-  e.preventDefault();
+function validateForm(){
+  submitBtn.disabled=!form.checkValidity();
+  submitBtn.classList.toggle("enabled",form.checkValidity());
+}
 
-  fetch("https://script.google.com/macros/s/AKfycbxWycwuz8Diry8vhB7P0MCbtOpILKASqfEtCjNlWi8QryLdo8YJDIHB28hQ2saRarT6qQ/exec", {
-    method: "POST",
-    body: new FormData(this)
-  })
-  .then(r => r.text())
-  .then(() => {
-    alert("ICR Feedback submitted successfully");
-    this.reset();
-    refiSection.classList.add("hidden");
-    purchaseSection.classList.add("hidden");
-  })
-  .catch(err => {
-    alert("Submission failed");
-    console.error(err);
+form.addEventListener("input",validateForm);
+form.addEventListener("change",validateForm);
+
+function toggleLoan(v){
+  refiSection.classList.toggle("hidden",v!=="Refi");
+  purchaseSection.classList.toggle("hidden",v!=="Purchase");
+  validateForm();
+}
+
+function toggleSection(el,id,val){
+  const sec=document.getElementById(id);
+  const show=el.value===val;
+  sec.classList.toggle("hidden",!show);
+  setRequired(sec,show);
+}
+
+function toggleOA(el,type){
+  const show=el.value==="Yes";
+  ["OA","ChildGate"].forEach(s=>{
+    const sec=document.getElementById(type+s);
+    sec.classList.toggle("hidden",!show);
+    setRequired(sec,show);
   });
+}
+
+function entityDocs(el,type){
+  const sec=document.getElementById(type+"EntityCorrect");
+  sec.classList.toggle("hidden",el.value!=="Yes");
+  setRequired(sec,el.value==="Yes");
+  const det=document.getElementById(type+"EntityDetails");
+  det.classList.add("hidden");
+  setRequired(det,false);
+}
+
+function entityCorrect(el,type){
+  const det=document.getElementById(type+"EntityDetails");
+  det.classList.toggle("hidden",el.value!=="No");
+  setRequired(det,el.value==="No");
+}
+
+/* GOOGLE SHEETS SUBMIT */
+form.addEventListener("submit",e=>{
+  e.preventDefault();
+  fetch("https://script.google.com/macros/s/AKfycbxWycwuz8Diry8vhB7P0MCbtOpILKASqfEtCjNlWi8QryLdo8YJDIHB28hQ2saRarT6qQ/exec",{method:"POST",body:new FormData(form)})
+  .then(()=>{alert("Form submitted successfully");form.reset();validateForm();});
 });
 </script>
 
 </body>
 </html>
-
