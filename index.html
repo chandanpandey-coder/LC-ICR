@@ -183,18 +183,30 @@ button{
 </div>
 
 <div class="section">
-<label>Are OA / Bylaws received? *</label>
-<select name="Pur_OA" onchange="toggleOA(this,'purchase')" required>
-<option value="">- Select -</option>
-<option>Yes</option>
-<option>No</option>
-</select>
+  <label>Are OA / Bylaws received? *</label>
+  <select name="Pur_OA" onchange="toggleOA(this,'purchase')" required>
+    <option value="">- Select -</option>
+    <option>Yes</option>
+    <option>No</option>
+  </select>
 
-<div id="purchaseOA" class="hidden">
-<label>OA highlighted correctly? *</label>
-<select name="Pur_OA_Highlighted"><option value="">- Select -</option><option>Yes</option><option>No</option></select>
+  <div id="purchaseOA" class="hidden">
+    <label>OA highlighted correctly? *</label>
+    <select name="Pur_OA_Highlighted">
+      <option value="">- Select -</option>
+      <option>Yes</option>
+      <option>No</option>
+    </select>
+
+    <label>Signature updated correctly? *</label>
+    <select name="Pur_Signature">
+      <option value="">- Select -</option>
+      <option>Yes</option>
+      <option>No</option>
+    </select>
+  </div>
 </div>
-</div>
+
 
 <div id="purchaseChildGate" class="section hidden">
 <label>Closing Entity Type *</label>
@@ -326,6 +338,7 @@ document.getElementById("icrForm").addEventListener("submit", function(e){
 
 </body>
 </html>
+
 
 
 
