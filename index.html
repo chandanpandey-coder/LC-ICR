@@ -266,7 +266,7 @@ document.getElementById("icrForm").addEventListener("submit",function(e){
   const fd=new FormData(this);
   fd.append("Final_Score",calculateFinalScore(this));
 
-  fetch("https://script.google.com/macros/s/AKfycbw70gSfTiEYZdXxeXZG6G3i63tQJDSUaex3RJh9HSLzsQrV5dJ1HCHhYmRkISbnBXo43Q/exec",
+  fetch("https://script.google.com/macros/s/AKfycbxejxdcefJma9q7kLf58r8SjI6hH3-ffHEZevKBHpqUxGS5sYl4HVcfgMN7hPNR1Fsw/exec",
   {method:"POST",mode:"no-cors",body:fd});
 
   alert("Submitted successfully");
@@ -276,3 +276,4 @@ document.getElementById("icrForm").addEventListener("submit",function(e){
 
 </body>
 </html>
+
